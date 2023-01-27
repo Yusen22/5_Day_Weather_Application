@@ -12,6 +12,10 @@
     width: auto;
 }
 
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
 #today {
     padding: 10px 30px;
 }
