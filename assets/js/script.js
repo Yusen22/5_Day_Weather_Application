@@ -54,11 +54,12 @@ $("#search-input").keyup(function (event) {
             }
 
             $('#search-input').autocomplete({
+                appendTo: ".input-group",
                 source: availableTags
             });
 
-            $('.ui-menu-item').css({"border": "1px solid black", "padding": "20px"})
 
+           
             coordinates.long = response.lon;
             coordinates.lat = response.lat;
 
