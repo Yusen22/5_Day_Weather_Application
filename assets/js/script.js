@@ -20,15 +20,54 @@ var currentCityWeatherData
 
 
 function displayCurrentWeather() {
+
+    var todayHeader = $('#today-header')
+    var todayContent = $('#today-content')
+
+    
+
+    // Splits date from time from response data 
+    var splitDate = (currentCityWeatherData.dt_txt).split(" ");
+
+    // Sets current weather object with relevant data from response 
     var currentWeather = {
         cityName: cityName,
-        date: currentCityWeatherData.dt_txt,
+        date: splitDate[0],
         icon: currentCityWeatherData.weather[0].icon,
-        temp: currentCityWeatherData.main.temp - 273.15,
+        temp: (currentCityWeatherData.main.temp - 273.15).toFixed(1),
         humidity: currentCityWeatherData.main.humidity,
         windspeed: currentCityWeatherData.wind.speed
     }
-    console.log(currentWeather)
+
+    // Logs new object to the console 
+    console.log(currentWeather);
+
+    // Creates a h2 with text and date, sets style and appends to parent div
+    var newCurrentHeader = $('<h2>')
+    newCurrentHeader.text(cityName + " (" + currentWeather.date + ")")
+    newCurrentHeader.css({"width": "fit-content", "margin": "none", "display": "inline"})
+    todayHeader.append(newCurrentHeader)
+
+    // Adds image with icon of current weather and appends to header div 
+    var icon = $('<img>')
+    icon.attr("src", "http://openweathermap.org/img/wn/" + currentWeather.icon + "@2x.png")
+    icon.css("margin-left", "15px")
+    todayHeader.append(icon)
+
+    var tempP = $('<p>');
+    tempP.text("Temp: " + currentWeather.temp + " °C");
+    todayContent.append(tempP)
+
+    var humP = $('<p>');
+    humP.text("Humidity: " + currentWeather.humidity);
+    todayContent.append(humP)
+
+    var windP = $('<p>');
+    windP.text("Windspeed: " + currentWeather.windspeed + " m/s");
+    todayContent.append(windP)
+
+
+    $('#today').css("border", "1px solid black")
 }
 
 
@@ -59,7 +98,7 @@ $("#search-input").keyup(function (event) {
                 // Create an array with all cities and their country code 
                 availableTags.push(cityAndCode)
 
-                availableTags = jQuery.uniqueSort( availableTags );
+                availableTags = jQuery.uniqueSort(availableTags);
 
 
             }
@@ -108,16 +147,16 @@ $('#search-button').on("click", function (event) {
             alert("This city can't be found. Try again.")
         }
 
-        
+
         lat = response[0].lat
         long = response[0].lon
-       
+
         var forecastQuery = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
 
         $.ajax({
             url: forecastQuery,
             method: 'get'
-        }).then(function (response) { 
+        }).then(function (response) {
             console.log(response)
 
             currentCityWeatherData = response.list[0]
