@@ -71,8 +71,13 @@ $('#search-button').on("click", function (event) {
     // Prevents form from being submitted
     event.preventDefault()
 
+    
+
     // stores searched city name to a variable 
     cityName = $('#search-input').val();
+    if(cityName === '') {
+        cityName = 'London, GB'
+    }
 
     // stores the query URL for converting a city name into coordinates 
     var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
@@ -86,8 +91,16 @@ $('#search-button').on("click", function (event) {
         // Validates the presence of a result 
         console.log(response)
         if(response.length == 0 ) {
-            alert("This city can't be found! Try again")
+            alert("This city can't be found. Try again.")
         }
+
+        coordinates.lat = response[0].lat
+        coordinates.long = response[0].lon
+
+        $.ajax({
+            url: forecastQuery,
+            method: 'get'
+        }).then()
 
     });
 })
