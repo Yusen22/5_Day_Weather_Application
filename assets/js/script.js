@@ -31,6 +31,7 @@ $("#search-input").keyup(function (event) {
 
     // stores the query URL for converting a city name into coordinates 
     var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+
     // AJAX call to convert city name to coordinates 
     if (cityName.length >= 3) {
         $.ajax({
@@ -43,14 +44,13 @@ $("#search-input").keyup(function (event) {
             var availableTags = [];
 
 
-            // If there are more than one city with this name...
-
             for (i in currentCities) {
                 var cityAndCode = currentCities[i].name + ", " + currentCities[i].country;
+
                 // Create an array with all cities and their country code 
                 availableTags.push(cityAndCode)
 
-                
+
             }
 
             $('#search-input').autocomplete({
@@ -58,25 +58,37 @@ $("#search-input").keyup(function (event) {
                 source: availableTags
             });
 
-
-           
-            coordinates.long = response.lon;
-            coordinates.lat = response.lat;
-
-
-
-
         })
 
     }
 
-
 });
 
 
-$('#search-button').on("click", function () {
+
+$('#search-button').on("click", function (event) {
+
+    // Prevents form from being submitted
+    event.preventDefault()
 
     // stores searched city name to a variable 
     cityName = $('#search-input').val();
+
+    // stores the query URL for converting a city name into coordinates 
+    var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+
+    // AJAX call to convert city name to coordinates 
+    $.ajax({
+        url: geoQuery,
+        method: 'get'
+    }).then(function (response) {
+
+        // Validates the presence of a result 
+        console.log(response)
+        if(response.length == 0 ) {
+            alert("This city can't be found! Try again")
+        }
+
+    });
 })
 
