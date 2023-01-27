@@ -21,8 +21,13 @@ var currentCityWeatherData
 
 function displayCurrentWeather() {
 
+    
+
     var todayHeader = $('#today-header')
     var todayContent = $('#today-content')
+
+    todayHeader.empty();
+    todayContent.empty()
 
     
 
@@ -70,6 +75,16 @@ function displayCurrentWeather() {
     $('#today').css("border", "1px solid black")
 }
 
+function displayForecast () {
+
+    var forecast = $('#forecast')
+
+    forecast.empty()
+
+    var forecastHead = $('<h3 id="forecast-head">5-Day Forecast</h3>')
+    forecast.append(forecastHead)
+
+}
 
 
 $("#search-input").keyup(function (event) {
@@ -162,6 +177,7 @@ $('#search-button').on("click", function (event) {
             currentCityWeatherData = response.list[0]
 
             displayCurrentWeather();
+            displayForecast();
         })
 
     });
