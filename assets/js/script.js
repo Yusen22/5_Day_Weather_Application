@@ -12,12 +12,24 @@ var cityName
 
 var currentCities = []
 
+var currentCityWeatherData
+
 
 
 // stores the URL to call the 5 Day forecast API for seached city  
 
 
-
+function displayCurrentWeather() {
+    var currentWeather = {
+        cityName: cityName,
+        date: currentCityWeatherData.dt_txt,
+        icon: currentCityWeatherData.weather[0].icon,
+        temp: currentCityWeatherData.main.temp - 273.15,
+        humidity: currentCityWeatherData.main.humidity,
+        windspeed: currentCityWeatherData.wind.speed
+    }
+    console.log(currentWeather)
+}
 
 
 
@@ -84,9 +96,6 @@ $('#search-button').on("click", function (event) {
     var long
     var lat
 
-
-    
-
     // AJAX call to convert city name to coordinates 
     $.ajax({
         url: geoQuery,
@@ -111,7 +120,9 @@ $('#search-button').on("click", function (event) {
         }).then(function (response) { 
             console.log(response)
 
-            
+            currentCityWeatherData = response.list[0]
+
+            displayCurrentWeather();
         })
 
     });
