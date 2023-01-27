@@ -4,10 +4,7 @@ var apiKey = 'e4553d760058ca77401a79ef06ac6fe8';
 
 
 // Variables to store coordinates of searched city 
-var coordinates = {
-    long: 'x',
-    lat: 'y'
-};
+
 
 
 
@@ -18,7 +15,7 @@ var currentCities = []
 
 
 // stores the URL to call the 5 Day forecast API for seached city  
-var forecastQuery = "https://api.openweathermap.org/data/2.5/forecast?lat=" + coordinates.lat + "&lon=" + coordinates.long + "&appid=" + apiKey;
+
 
 
 
@@ -50,6 +47,8 @@ $("#search-input").keyup(function (event) {
                 // Create an array with all cities and their country code 
                 availableTags.push(cityAndCode)
 
+                availableTags = jQuery.uniqueSort( availableTags );
+
 
             }
 
@@ -71,16 +70,22 @@ $('#search-button').on("click", function (event) {
     // Prevents form from being submitted
     event.preventDefault()
 
-    
+
 
     // stores searched city name to a variable 
     cityName = $('#search-input').val();
-    if(cityName === '') {
+    if (cityName === '') {
         cityName = 'London, GB'
     }
 
     // stores the query URL for converting a city name into coordinates 
     var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+
+    var long
+    var lat
+
+
+    
 
     // AJAX call to convert city name to coordinates 
     $.ajax({
@@ -90,17 +95,24 @@ $('#search-button').on("click", function (event) {
 
         // Validates the presence of a result 
         console.log(response)
-        if(response.length == 0 ) {
+        if (response.length == 0) {
             alert("This city can't be found. Try again.")
         }
 
-        coordinates.lat = response[0].lat
-        coordinates.long = response[0].lon
+        
+        lat = response[0].lat
+        long = response[0].lon
+       
+        var forecastQuery = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
 
         $.ajax({
             url: forecastQuery,
             method: 'get'
-        }).then()
+        }).then(function (response) { 
+            console.log(response)
+
+            
+        })
 
     });
 })
