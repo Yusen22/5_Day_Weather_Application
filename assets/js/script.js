@@ -160,16 +160,17 @@ function getHistory() {
     retrieveCities = JSON.parse(localStorage.getItem('cities'))
     console.log(retrieveCities)
 
-    
+
 
     if (retrieveCities === null) {
         retrieveCities = []
         return
 
-    }   else {
+    } else {
         for (var j = 0; j < retrieveCities.length; j++) {
             var historyButton = $('<button>')
             historyButton.text(retrieveCities[j])
+            historyButton.addClass('history-button')
             $('#history').append(historyButton)
         }
 
@@ -183,6 +184,7 @@ function setHistory() {
         localStorage.setItem('cities', JSON.stringify(cityName))
         var historyButton = $('<button>')
         historyButton.text(cityName)
+        historyButton.addClass('history-button')
         $('#history').append(historyButton)
 
     } else {
@@ -192,6 +194,53 @@ function setHistory() {
         getHistory();
     }
 }
+
+
+function searchWeather() {
+
+    $('#search-input').val('')
+
+    // stores the query URL for converting a city name into coordinates 
+    var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+
+    var long
+    var lat
+
+    // AJAX call to convert city name to coordinates 
+    $.ajax({
+        url: geoQuery,
+        method: 'get'
+    }).then(function (response) {
+
+        // Validates the presence of a result 
+        console.log(response)
+        if (response.length == 0) {
+            alert("This city can't be found. Try again.")
+        }
+
+
+        lat = response[0].lat
+        long = response[0].lon
+
+        var forecastQuery = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
+
+        $.ajax({
+            url: forecastQuery,
+            method: 'get'
+        }).then(function (response) {
+            console.log(response)
+
+            currentCityWeatherData = response.list
+
+            displayCurrentWeather();
+            displayForecast();
+
+        })
+
+
+    });
+}
+
 
 
 $("#search-input").keyup(function (event) {
@@ -245,49 +294,19 @@ $('#search-button').on("click", function (event) {
 
 
 
+
     // stores searched city name to a variable 
     cityName = $('#search-input').val();
     if (cityName === '') {
         cityName = 'London, GB'
     }
-
-    // stores the query URL for converting a city name into coordinates 
-    var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
-
-    var long
-    var lat
-
-    // AJAX call to convert city name to coordinates 
-    $.ajax({
-        url: geoQuery,
-        method: 'get'
-    }).then(function (response) {
-
-        // Validates the presence of a result 
-        console.log(response)
-        if (response.length == 0) {
-            alert("This city can't be found. Try again.")
-        }
-
-
-        lat = response[0].lat
-        long = response[0].lon
-
-        var forecastQuery = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
-
-        $.ajax({
-            url: forecastQuery,
-            method: 'get'
-        }).then(function (response) {
-            console.log(response)
-
-            currentCityWeatherData = response.list
-
-            displayCurrentWeather();
-            displayForecast();
-            setHistory()
-        })
-
-    });
+    setHistory()
+    searchWeather()
 })
 
+
+$('.history-button').on("click", function (event) {
+    cityName = $(this).text();
+
+    searchWeather();
+})
