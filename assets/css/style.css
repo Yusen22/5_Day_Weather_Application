@@ -23,5 +23,13 @@
 #today-header {
     display: flex;
     align-items: center;
-  
+}
+
+#forecast-header,
+#forecast-display {
+    width: 100%;
+}
+
+#forecast-display {
+    justify-content: space-around;
 }

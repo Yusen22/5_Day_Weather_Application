@@ -76,15 +76,14 @@ function displayCurrentWeather() {
 
 function displayForecast() {
 
-    var forecast = $('#forecast')
+    var forecastHeader = $('#forecast-header');
+    var forecastDisplay = $('#forecast-display');
 
-    forecast.empty()
+    forecastDisplay.empty();
+    forecastHeader.empty()
 
-    var forecastHead = $('<h3 id="forecast-head">5-Day Forecast</h3>')
-    forecast.append(forecastHead)
-
-    var forecastCard = $('<div>')
-
+    var forecastTitle = $('<h3 id="forecast-head">5-Day Forecast</h3>')
+    forecastHeader.append(forecastTitle)
 
 
     for (var i = 0; i < 5; i++) {
@@ -95,10 +94,10 @@ function displayForecast() {
         for (x in currentCityWeatherData) {
 
             var splitDate = (currentCityWeatherData[x].dt_txt).split(" ")
-
+          
             var setDayWeather
 
-            if (splitDate[0] === dayIncrement) {
+            if (splitDate[0] === dayIncrement && splitDate[1] === "12:00:00") {
                 console.log("It's " + splitDate[0])
                 setDayWeather = currentCityWeatherData[x]
 
@@ -111,24 +110,28 @@ function displayForecast() {
 
         var setDayObject = {
             date: splitDate[0],
-            icon: setDayWeather.weather.icon,
+            icon: setDayWeather.weather[0].icon,
             temp: (setDayWeather.main.temp - 273.15).toFixed(1),
             humidity: setDayWeather.main.humidity,
             windspeed: setDayWeather.wind.speed
 
         }
 
-        forecastCard.css({ "color": "white", "background-color": "obsidian" , "width": "18rem" })
+        console.log(setDayObject)
+
+        var forecastCard = $('<div>')
+
+        forecastCard.css({ "color": "white", "background-color": "navy", "width": "12rem" })
         forecastCard.addClass("card")
 
         var dateHead = $('<h4 id="date-head">')
         dateHead.text(setDayObject.date)
         forecastCard.append(dateHead)
 
-        // var icon = $('<img>')
-        // icon.attr("src", "http://openweathermap.org/img/wn/" + setDayObject.icon + ".png")
-        // icon.css("margin-left", "15px")
-        // forecastCard.append(icon)
+        var icon = $('<img>')
+        icon.attr("src", "http://openweathermap.org/img/wn/" + setDayObject.icon + ".png")
+        icon.css("margin-left", "15px")
+        forecastCard.append(icon)
 
         var tempP = $('<p>');
         tempP.text("Temp: " + setDayObject.temp + " °C");
