@@ -25,11 +25,30 @@
     align-items: center;
 }
 
+
 #forecast-header,
 #forecast-display {
     width: 100%;
 }
 
+#forecast-header {
+    padding: 10px 0;
+    margin-left: 50px
+}
+
 #forecast-display {
     justify-content: space-around;
+    margin-left: 10px
+}
+
+.card {
+    padding: 20px;
+    margin: 10px 0;
+}
+
+
+.forecast-icon {
+    height: 30%;
+    width: 30%;
+    padding-bottom: 20px;
 }

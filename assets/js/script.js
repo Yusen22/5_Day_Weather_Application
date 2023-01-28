@@ -130,6 +130,7 @@ function displayForecast() {
 
         var icon = $('<img>')
         icon.attr("src", "http://openweathermap.org/img/wn/" + setDayObject.icon + ".png")
+        icon.addClass('forecast-icon')
         icon.css("margin-left", "15px")
         forecastCard.append(icon)
 
