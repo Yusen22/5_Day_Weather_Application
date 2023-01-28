@@ -17,6 +17,8 @@ var currentCityWeatherData
 
 // stores the URL to call the 5 Day forecast API for seached city  
 
+$(getHistory())
+
 
 function displayCurrentWeather() {
 
@@ -94,7 +96,7 @@ function displayForecast() {
         for (x in currentCityWeatherData) {
 
             var splitDate = (currentCityWeatherData[x].dt_txt).split(" ")
-          
+
             var setDayWeather
 
             if (splitDate[0] === dayIncrement && splitDate[1] === "12:00:00") {
@@ -150,6 +152,45 @@ function displayForecast() {
 
     }
 
+}
+
+var retrieveCities
+
+function getHistory() {
+    retrieveCities = JSON.parse(localStorage.getItem('cities'))
+    console.log(retrieveCities)
+
+    
+
+    if (retrieveCities === null) {
+        retrieveCities = []
+        return
+
+    }   else {
+        for (var j = 0; j < retrieveCities.length; j++) {
+            var historyButton = $('<button>')
+            historyButton.text(retrieveCities[j])
+            $('#history').append(historyButton)
+        }
+
+    }
+}
+
+
+
+function setHistory() {
+    if (retrieveCities == []) {
+        localStorage.setItem('cities', JSON.stringify(cityName))
+        var historyButton = $('<button>')
+        historyButton.text(cityName)
+        $('#history').append(historyButton)
+
+    } else {
+        $('#history').empty()
+        retrieveCities.push(cityName)
+        localStorage.setItem('cities', JSON.stringify(retrieveCities))
+        getHistory();
+    }
 }
 
 
@@ -244,6 +285,7 @@ $('#search-button').on("click", function (event) {
 
             displayCurrentWeather();
             displayForecast();
+            setHistory()
         })
 
     });
