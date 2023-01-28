@@ -15,13 +15,12 @@ var currentCities = []
 var currentCityWeatherData
 
 
-
 // stores the URL to call the 5 Day forecast API for seached city  
 
 
 function displayCurrentWeather() {
 
-    
+
 
     var todayHeader = $('#today-header')
     var todayContent = $('#today-content')
@@ -29,19 +28,19 @@ function displayCurrentWeather() {
     todayHeader.empty();
     todayContent.empty()
 
-    
+
 
     // Splits date from time from response data 
-    var splitDate = (currentCityWeatherData.dt_txt).split(" ");
+    var splitDate = (currentCityWeatherData[0].dt_txt).split(" ");
 
     // Sets current weather object with relevant data from response 
     var currentWeather = {
         cityName: cityName,
         date: splitDate[0],
-        icon: currentCityWeatherData.weather[0].icon,
-        temp: (currentCityWeatherData.main.temp - 273.15).toFixed(1),
-        humidity: currentCityWeatherData.main.humidity,
-        windspeed: currentCityWeatherData.wind.speed
+        icon: currentCityWeatherData[0].weather[0].icon,
+        temp: (currentCityWeatherData[0].main.temp - 273.15).toFixed(1),
+        humidity: currentCityWeatherData[0].main.humidity,
+        windspeed: currentCityWeatherData[0].wind.speed
     }
 
     // Logs new object to the console 
@@ -50,7 +49,7 @@ function displayCurrentWeather() {
     // Creates a h2 with text and date, sets style and appends to parent div
     var newCurrentHeader = $('<h2>')
     newCurrentHeader.text(cityName + " (" + currentWeather.date + ")")
-    newCurrentHeader.css({"width": "fit-content", "margin": "none", "display": "inline"})
+    newCurrentHeader.css({ "width": "fit-content", "margin": "none", "display": "inline" })
     todayHeader.append(newCurrentHeader)
 
     // Adds image with icon of current weather and appends to header div 
@@ -75,7 +74,7 @@ function displayCurrentWeather() {
     $('#today').css("border", "1px solid black")
 }
 
-function displayForecast () {
+function displayForecast() {
 
     var forecast = $('#forecast')
 
@@ -83,6 +82,69 @@ function displayForecast () {
 
     var forecastHead = $('<h3 id="forecast-head">5-Day Forecast</h3>')
     forecast.append(forecastHead)
+
+    var forecastCard = $('<div>')
+
+
+
+    for (var i = 0; i < 5; i++) {
+
+        var dayIncrement = moment().add([i + 1], 'days').format("YYYY-MM-DD")
+        console.log(dayIncrement)
+
+        for (x in currentCityWeatherData) {
+
+            var splitDate = (currentCityWeatherData[x].dt_txt).split(" ")
+
+            var setDayWeather
+
+            if (splitDate[0] === dayIncrement) {
+                console.log("It's " + splitDate[0])
+                setDayWeather = currentCityWeatherData[x]
+
+                break
+            }
+
+        }
+
+        console.log(setDayWeather)
+
+        var setDayObject = {
+            date: splitDate[0],
+            icon: setDayWeather.weather.icon,
+            temp: (setDayWeather.main.temp - 273.15).toFixed(1),
+            humidity: setDayWeather.main.humidity,
+            windspeed: setDayWeather.wind.speed
+
+        }
+
+        forecastCard.css({ "color": "white", "background-color": "obsidian" , "width": "18rem" })
+        forecastCard.addClass("card")
+
+        var dateHead = $('<h4 id="date-head">')
+        dateHead.text(setDayObject.date)
+        forecastCard.append(dateHead)
+
+        // var icon = $('<img>')
+        // icon.attr("src", "http://openweathermap.org/img/wn/" + setDayObject.icon + ".png")
+        // icon.css("margin-left", "15px")
+        // forecastCard.append(icon)
+
+        var tempP = $('<p>');
+        tempP.text("Temp: " + setDayObject.temp + " °C");
+        forecastCard.append(tempP)
+
+        var humP = $('<p>');
+        humP.text("Humidity: " + setDayObject.humidity);
+        forecastCard.append(humP)
+
+        var windP = $('<p>');
+        windP.text("Windspeed: " + setDayObject.windspeed + " m/s");
+        forecastCard.append(windP)
+
+        $('#forecast-display').append(forecastCard)
+
+    }
 
 }
 
@@ -174,7 +236,7 @@ $('#search-button').on("click", function (event) {
         }).then(function (response) {
             console.log(response)
 
-            currentCityWeatherData = response.list[0]
+            currentCityWeatherData = response.list
 
             displayCurrentWeather();
             displayForecast();
