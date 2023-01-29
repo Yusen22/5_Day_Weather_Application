@@ -59,6 +59,9 @@ function getHistory() {
             $('#history').append(historyButton)
         }
 
+        var removeHistoryButton = $('<button class="btn btn-danger" id="remove-history">Clear All History</button>')
+        removeHistoryButton.css("margin", "7px 10% 7px 0px")
+        $('#history').append(removeHistoryButton)
     }
 }
 
@@ -390,7 +393,7 @@ $("#search-input").keyup(function (event) {
 });
 
 
-
+// Event listener for click of search button 
 $('#search-button').on("click", function (event) {
 
 
@@ -407,14 +410,14 @@ $('#search-button').on("click", function (event) {
 
     // If nothing is entered, search London 
     if (cityName === '') {
-        cityName = 'London, GB'
-    }
+        cityName = 'London, GB';
+    };
 
     // Run setHistory to update local storage and history buttons...
-    setHistory()
+    setHistory();
 
     // And run this to display forecasts for searched city 
-    searchWeather()
+    searchWeather();
 })
 
 
@@ -424,9 +427,30 @@ $('.history-button').on("click", function () {
 
     // Set cityName to the text of the clicked button 
     cityName = $(this).text();
-    console.log(cityName)
+    console.log(cityName);
 
     // Search weather for that text value and display on page 
     searchWeather();
 
+})
+
+
+// Event listener for remove history button...
+$('#remove-history').on("click", function() {
+
+    // Confirms user wants to clear 
+    var answer = confirm("Do you want to clear all previously searched cities?");
+
+    // If true, alert user and clear retrieve cities array and history div...
+    if(answer === true) {
+        alert("History removed!")
+        retrieveCities = "";
+        $('#history').empty()
+
+        // Clears local storage...
+        localStorage.clear();
+
+        // And remove buttons 
+        getHistory();
+    }
 })

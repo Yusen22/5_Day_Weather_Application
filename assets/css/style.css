@@ -45,7 +45,7 @@ header {
 
 #forecast-header,
 #forecast-display {
-    width: 100%;
+    width: 99%;
 }
 
 #forecast-header {
@@ -61,6 +61,7 @@ header {
 .card {
     padding: 20px;
     margin: 10px 0;
+    font-size: 93%;
 }
 
 
