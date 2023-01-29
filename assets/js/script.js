@@ -44,8 +44,12 @@ function getHistory() {
         // Otherwise, generate a button for each value inside the array, insert city name and append to history div
     } else {
         for (var j = 0; j < retrieveCities.length; j++) {
+
+            // 
+            var splitRetrieve = jQuery.uniqueSort(retrieveCities)
+
             var historyButton = $('<button>')
-            historyButton.text(retrieveCities[j])
+            historyButton.text(splitRetrieve[j])
             historyButton.addClass('btn btn-secondary history-button')
             historyButton.attr("type", "button")
             historyButton.css("margin", "7px 10% 7px 0px")
@@ -162,6 +166,8 @@ function displayCurrentWeather() {
     // Ensures both divs have no children elements
     todayHeader.empty();
     todayContent.empty()
+
+    $('#today').css("display", "block")
 
 
     // Splits date / time from response data into array
@@ -280,7 +286,7 @@ function displayForecast() {
 
 
         // Sets new div tag styles and assigns class
-        forecastCard.css({ "color": "white", "background-color": "#58A22A", "width": "12rem" })
+        forecastCard.css({ "color": "white", "background-color": "#C9D5B5", "width": "12rem" })
         forecastCard.addClass("card")
 
 
@@ -389,13 +395,12 @@ $('#search-button').on("click", function (event) {
     event.preventDefault()
     event.stopPropagation()
 
+    // Stores searched city name to a variable 
+    cityName = $('#search-input').val();
 
     // Resets search input box 
     $('#search-input').val('')
 
-
-    // Stores searched city name to a variable 
-    cityName = $('#search-input').val();
 
     // If nothing is entered, search London 
     if (cityName === '') {
@@ -414,7 +419,7 @@ $('#search-button').on("click", function (event) {
 // On click for history search terms on buttton
 $('.history-button').on("click", function () {
 
-// Set cityName to the text of the clicked button 
+    // Set cityName to the text of the clicked button 
     cityName = $(this).text();
     console.log(cityName)
 
