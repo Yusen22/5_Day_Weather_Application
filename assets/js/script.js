@@ -43,7 +43,7 @@ function getHistory() {
 
         // Otherwise, generate a button for each value inside the array, insert city name and append to history div
     } else {
-        for (var j = 0; j < retrieveCities.length; j++) {
+        for (var j = 0; j < retrieveCities.length && j < 9; j++) {
 
             // Removes duplicates and saves to new array 
             var splitRetrieve = jQuery.uniqueSort(retrieveCities)
@@ -59,6 +59,7 @@ function getHistory() {
             $('#history').append(historyButton)
         }
 
+        // Var tp create remove history button. Css added and appended
         var removeHistoryButton = $('<button class="btn btn-danger" id="remove-history">Clear All History</button>')
         removeHistoryButton.css("margin", "7px 10% 7px 0px")
         $('#history').append(removeHistoryButton)
@@ -79,8 +80,8 @@ function setHistory() {
         localStorage.setItem('cities', JSON.stringify(cityName))
 
 
-        // Else empty history div to stop repetition of buttons...
-    } else {
+        // Else if retrieved cities length is less than 10 empty history div to stop repetition of buttons and dont save city to storage
+    } else if (retrieveCities.length < 10) {
         $('#history').empty()
 
 
@@ -93,6 +94,7 @@ function setHistory() {
         getHistory();
     }
 }
+
 
 
 
@@ -399,7 +401,7 @@ $('#search-button').on("click", function (event) {
 
     // Prevent form from being submitted
     event.preventDefault()
-    event.stopPropagation()
+    event.stopImmediatePropagation()
 
     // Stores searched city name to a variable 
     cityName = $('#search-input').val();
@@ -436,13 +438,13 @@ $('.history-button').on("click", function () {
 
 
 // Event listener for remove history button...
-$('#remove-history').on("click", function() {
+$('#remove-history').on("click", function () {
 
     // Confirms user wants to clear 
     var answer = confirm("Do you want to clear all previously searched cities?");
 
     // If true, alert user and clear retrieve cities array and history div...
-    if(answer === true) {
+    if (answer === true) {
         alert("History removed!")
         retrieveCities = "";
         $('#history').empty()

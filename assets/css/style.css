@@ -1,7 +1,7 @@
-body {
+/* body {
     background-image: linear-gradient(to left top, #FFFFFF, #BFC0C0);
-    height: 100vh;
-}
+    height: 160vh;
+} */
 
 header {
     background-image: linear-gradient(to bottom, #4F5D75, #2D3142);
@@ -25,6 +25,9 @@ header {
     margin-block-start: 0;
     padding: 0;
     width: auto;
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 5;
 }
 
 .ui-helper-hidden-accessible {
