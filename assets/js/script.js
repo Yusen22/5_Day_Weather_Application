@@ -47,6 +47,7 @@ function getHistory() {
 
             // 
             var splitRetrieve = jQuery.uniqueSort(retrieveCities)
+            splitRetrieve = splitRetrieve.sort()
 
             var historyButton = $('<button>')
             historyButton.text(splitRetrieve[j])
@@ -286,7 +287,7 @@ function displayForecast() {
 
 
         // Sets new div tag styles and assigns class
-        forecastCard.css({ "color": "white", "background-color": "#C9D5B5", "width": "12rem" })
+        forecastCard.css({ "color": "white", "background-color": "#58A22A", "width": "12rem" })
         forecastCard.addClass("card")
 
 
