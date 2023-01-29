@@ -45,8 +45,10 @@ function getHistory() {
     } else {
         for (var j = 0; j < retrieveCities.length; j++) {
 
-            // 
+            // Removes duplicates and saves to new array 
             var splitRetrieve = jQuery.uniqueSort(retrieveCities)
+
+            // Sorts history array alphabetically 
             splitRetrieve = splitRetrieve.sort()
 
             var historyButton = $('<button>')
