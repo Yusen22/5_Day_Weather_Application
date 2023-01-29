@@ -11,7 +11,7 @@ var cityName
 // Variable for all individual city data under same search name
 var currentCities = []
 
-//  Object variable for relevant weather data on searched city. Set outside for scope
+//  Object variable for relevant weather data on searched city.
 var currentCityWeatherData
 
 
@@ -23,6 +23,7 @@ $(getHistory())
 
 // Variable for previously searched city names from local data
 var retrieveCities
+
 
 
 // Function for pulling historic search terms from local storage
@@ -45,7 +46,9 @@ function getHistory() {
         for (var j = 0; j < retrieveCities.length; j++) {
             var historyButton = $('<button>')
             historyButton.text(retrieveCities[j])
-            historyButton.addClass('history-button')
+            historyButton.addClass('btn btn-secondary history-button')
+            historyButton.attr("type", "button")
+            historyButton.css("margin", "7px 10% 7px 0px")
             $('#history').append(historyButton)
         }
 
@@ -277,7 +280,7 @@ function displayForecast() {
 
 
         // Sets new div tag styles and assigns class
-        forecastCard.css({ "color": "white", "background-color": "navy", "width": "12rem" })
+        forecastCard.css({ "color": "white", "background-color": "#58A22A", "width": "12rem" })
         forecastCard.addClass("card")
 
 
