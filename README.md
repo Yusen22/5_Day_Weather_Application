@@ -8,7 +8,7 @@ This project provides an application that displays weather data - including temp
 The application provides further functionality in saving the history of previously-searched cities in easily-accessible history buttons, which can be cleared at user request, and an autocomplete function for cities different cities with the same name. 
 
 
-The application can be accessed here: https://yusen22.github.io/Planner_Application/
+The application can be accessed here: https://yusen22.github.io/5_Day_Weather_Application/
 
 A screenshot of the application can be viewed here: ![Screenshot-of-weather-application](./assets/5_day_planner_app_screenshot.png"Screenshot of application")
 
@@ -29,10 +29,9 @@ N/A
 
 ## Usage
 
-Upon opening the application, the current date will be shown in the header. To view the current hour and date, open the development tools in the browser and access the console. 
+To begin using the application, start typing the name of a chosen city into the search box in the top-left of the application. As the input is entered, a number of autocomplete list items will appear under the search box, displaying the typed city name exactly with an additional country code. Select the desired option with regard to the country in which the chosen city resides by clicking on it. Then, click 'Submit' to search weather data for that location.  
 
-
-To make an entry in a 'timeblock', click in the coloured area next to the desired time and type a task for that hour. To save this text to local storage, click the blue 'Save' button that corresponds to the chosen 'timeblock' to the right of the page. An alert message will notify that the entered task has been saved, and the tasks in the chosen 'timeblock' will be recalled if the page is refreshed. 
+The weather data for that location - namely  
 
 If a 'timeblock' is saved with no content, an alert will occur and no action will be taken. 
 

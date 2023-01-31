@@ -215,7 +215,7 @@ function displayCurrentWeather() {
     todayContent.append(tempP)
 
     var humP = $('<p>');
-    humP.text("Humidity: " + currentWeather.humidity);
+    humP.text("Humidity: " + currentWeather.humidity + "%");
     todayContent.append(humP)
 
     var windP = $('<p>');
@@ -318,7 +318,7 @@ function displayForecast() {
 
 
         var humP = $('<p>');
-        humP.text("Humidity: " + setDayObject.humidity);
+        humP.text("Humidity: " + setDayObject.humidity + "%");
         forecastCard.append(humP)
 
 
