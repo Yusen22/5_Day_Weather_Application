@@ -5,12 +5,12 @@
 
 This project provides an application that displays weather data - including temperature, humidity and windspeed - for a chosen city on the current day and consecutive five days. 
 
-The application provides further functionality in saving the history of previously-searched cities in easily-accessible history buttons, which can be cleared at user request, and an autocomplete function for cities different cities with the same name. 
+The application provides further functionality in saving the history of previously-searched cities in easily-accessible history buttons, which can be cleared at user request, and an autocomplete function for different cities with the same name. 
 
 
 The application can be accessed here: https://yusen22.github.io/5_Day_Weather_Application/
 
-A screenshot of the application can be viewed here: ![Screenshot-of-weather-application](./assets/5_day_planner_app_screenshot.png"Screenshot of application")
+A screenshot of the application can be viewed here: ![Screenshot-of-weather-application](./assets/images/5_day_planner_app_screenshot.png"Screenshot of application")
 
 
 
