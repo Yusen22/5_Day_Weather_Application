@@ -425,7 +425,7 @@ $('#search-button').on("click", function (event) {
 
 
 // On click for history search terms on buttton
-$('.history-button').on("click", function () {
+$('#history').on("click",".history-button", function ()  {
 
     // Set cityName to the text of the clicked button 
     cityName = $(this).text();
@@ -438,7 +438,7 @@ $('.history-button').on("click", function () {
 
 
 // Event listener for remove history button...
-$('#remove-history').on("click", function () {
+$('#history').on("click", "#remove-history",function () {
 
     // Confirms user wants to clear 
     var answer = confirm("Do you want to clear all previously searched cities?");
