@@ -31,23 +31,16 @@ N/A
 
 To begin using the application, start typing the name of a chosen city into the search box in the top-left of the application. As the input is entered, a number of autocomplete list items will appear under the search box, displaying the typed city name exactly with an additional country code. Select the desired option with regard to the country in which the chosen city resides by clicking on it. Then, click 'Submit' to search weather data for that location.  
 
-The weather data for that location - namely  
+The weather data for that location - namely the temperature (in Celsius), humidity (in relative %), windspeed (in m/s), and an icon representing weather - will then be displayed within the application. The weather data for the current day, along with the date, are shown in the large card to the right of the page. The green cards underneath this element also display weather data for the five consecutive days following the current date.
 
-If a 'timeblock' is saved with no content, an alert will occur and no action will be taken. 
+NOTE: The weather data for each day is for the time of 12:00:00.
 
+Additionally, searching for and selecting a city, and then choosing to display it's weather data, will create a 'history' button for that city that persists when revisiting the page. This will be diplayed to the left of the application, underneath the search input. To access data from previously-searched cities, click the button with the chosen city name, and the weather forecast will be displayed.
 
-Each 'timeblock's' colour is dynamically updated within the app according to whether it is in the past in the current workday, it is the current hour, or it is in the future. The colour key for this feature is: 
- 
-                - PAST = Grey
-                - PRESENT = Red
-                - FUTURE = Green 
+To clear all historic search values, click the red 'Clear All History' button underneath the displayed history buttons. A prompt will then appear confirming this choice. Click 'OK' to confirm and remove all previous searches, or 'Cancel' to revert to the application with no change applied. 
 
-You will be able to enter tasks in any 'timeblock' regardless of it's current colour. 
+NOTE: A maximum of 9 historic search entries can be stored and displayed within the application.
 
-
-To clear all tasks permanently, locate the 'Clear All Tasks' button at the bottom of the application's page. Click the button, and then click 'OK' in the confirm alert message that appears on screen. All tasks will now be deleted, and new entries will need to be made for content to appear in the 'timeblocks'.
-
-Click 'Cancel' when asked to confirm deletion of all entries to return to the application with no action taken 
 
 
 ## Credits
