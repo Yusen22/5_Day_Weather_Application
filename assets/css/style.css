@@ -9,7 +9,11 @@ header {
     margin-bottom: 20px;
 }
 
-
+#city-search {
+    margin-top: 1rem;
+    margin-bottom: 1.7rem;
+    width: 100%;
+}
 
 
 
@@ -33,6 +37,14 @@ header {
 .ui-helper-hidden-accessible {
     display: none;
 }
+
+
+hr {
+    background-color: #2D3142;
+    width: 90%;
+    margin: 0;  
+}
+
 
 #today {
     padding: 10px 30px;

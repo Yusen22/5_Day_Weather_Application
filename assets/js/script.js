@@ -104,7 +104,7 @@ function searchWeather() {
     // FIRST - GETS COORDINATES OF CITY NAME
 
     // stores the query URL for converting a city name into coordinates 
-    var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+    var geoQuery = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
 
 
     // Variables to store longitude and latitude of city 
@@ -204,7 +204,7 @@ function displayCurrentWeather() {
 
     // Adds image with icon of current weather and appends to header div 
     var icon = $('<img>')
-    icon.attr("src", "http://openweathermap.org/img/wn/" + currentWeather.icon + "@2x.png")
+    icon.attr("src", "https://openweathermap.org/img/wn/" + currentWeather.icon + "@2x.png")
     icon.css("margin-left", "15px")
     todayHeader.append(icon)
 
@@ -306,7 +306,7 @@ function displayForecast() {
 
         var icon = $('<img>')
         // Pulls icon from API using code 
-        icon.attr("src", "http://openweathermap.org/img/wn/" + setDayObject.icon + ".png")
+        icon.attr("src", "https://openweathermap.org/img/wn/" + setDayObject.icon + ".png")
         icon.addClass('forecast-icon')
         icon.css("margin-left", "15px")
         forecastCard.append(icon)
@@ -348,7 +348,7 @@ $("#search-input").keyup(function (event) {
 
 
     // stores the query URL for converting a city name into coordinates 
-    var geoQuery = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
+    var geoQuery = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=" + apiKey;
 
 
     // AJAX call to convert city name to coordinates if typed name length exceeds 2 
