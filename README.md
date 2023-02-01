@@ -10,7 +10,7 @@ The application provides further functionality in saving the history of previous
 
 The application can be accessed here: https://yusen22.github.io/5_Day_Weather_Application/
 
-A screenshot of the application can be viewed here: ![Screenshot-of-weather-application](./assets/images/5_day_planner_app_screenshot.png"Screenshot of application")
+A screenshot of the application can be viewed here: ![Screenshot-of-weather-application](./assets/images/5_day_planner_app_screenshot.png "Screenshot of application")
 
 
 
